@@ -1,13 +1,13 @@
 github:
-  users: ["torvalds"]        # GitHub usernames/orgs to crawl
-  max_repos: 3               # per user/org
-  delay_seconds: 1.0         # polite sleep between requests/clones
+  users: ["kasramojallal1"]   # ← only your GitHub account
+  max_repos: 50              # bump high enough to cover all public repos
+  delay_seconds: 1.0
   outdir: "data/raw/github"
 
-  # Extraction mode: "repo" clones and reads all (text) files; "readme" only parses README from HTML
-  mode: "repo"
+  # Crawl mode
+  mode: "repo"                # "repo" = shallow-clone + file tree; "readme" = fast README-only
 
-  # Only used in mode: "repo"
+  # Repo-mode filters (to skip noise/binaries)
   ignore_dirs: [".git", ".github", "node_modules", "venv", "__pycache__", "dist", "build"]
   ignore_exts: [".png", ".jpg", ".jpeg", ".gif", ".pdf", ".svg", ".zip", ".tar", ".gz", ".lock", ".toml"]
-  max_file_mb: 1.0           # skip files larger than this
+  max_file_mb: 1.0
