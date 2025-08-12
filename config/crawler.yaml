@@ -1,0 +1,5 @@
+github:
+  users: ["torvalds"]     # list of usernames or orgs
+  max_repos: 5            # max repos per user
+  delay_seconds: 1.0      # polite delay between requests
+  outdir: "data/raw/github"
