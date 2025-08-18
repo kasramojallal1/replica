@@ -1,6 +1,6 @@
 github:
   users: ["kasramojallal1"]
-  max_repos: 200
+  max_repos: 50
   delay_seconds: 1.0
   outdir: "data/raw/github"
   mode: "repo"   # "repo" = shallow clone + file tree; "readme" = README only
@@ -16,3 +16,19 @@ storage:
   mongo_uri: "mongodb://localhost:27017"
   mongo_db: "llm_twin"
   mongo_collection: "repositories"
+
+
+postprocess:
+  clean_corpus: true
+  input_path: "data/processed/corpus.jsonl"
+  output_path: "data/processed/corpus.cleaned.jsonl"
+
+  # Language filtering
+  lang_min_chars: 200       # only run detector if text >= this (else ASCII heuristic)
+  lang_min_prob: 0.80       # P(en) threshold to keep
+
+  # Numeric filtering
+  max_digit_ratio: 0.60     # drop if digits / (letters+digits) >= 0.60
+
+  # Heuristic for short texts (code/docs are mostly ASCII)
+  ascii_min_ratio: 0.90     # if detector not used, require >= 90% ASCII to keep
