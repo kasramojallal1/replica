@@ -1,13 +1,18 @@
 github:
-  users: ["kasramojallal1"]   # ← only your GitHub account
-  max_repos: 50              # bump high enough to cover all public repos
+  users: ["kasramojallal1"]
+  max_repos: 200
   delay_seconds: 1.0
   outdir: "data/raw/github"
-
-  # Crawl mode
-  mode: "repo"                # "repo" = shallow-clone + file tree; "readme" = fast README-only
-
-  # Repo-mode filters (to skip noise/binaries)
+  mode: "repo"   # "repo" = shallow clone + file tree; "readme" = README only
   ignore_dirs: [".git", ".github", "node_modules", "venv", "__pycache__", "dist", "build"]
   ignore_exts: [".png", ".jpg", ".jpeg", ".gif", ".pdf", ".svg", ".zip", ".tar", ".gz", ".lock", ".toml"]
   max_file_mb: 1.0
+
+storage:
+  sink: "jsonl"                 # "jsonl" or "mongo"
+  jsonl_path: "data/raw/github/{user}/repos.jsonl"
+
+  # used only when sink = "mongo"
+  mongo_uri: "mongodb://localhost:27017"
+  mongo_db: "llm_twin"
+  mongo_collection: "repositories"
